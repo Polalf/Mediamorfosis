@@ -1,0 +1,73 @@
+using System;
+using UnityEngine;
+
+public enum ItemType {Particula , Planeta , Nube , Estrella }
+
+public class FusionItem : MonoBehaviour
+{
+    public ItemType itemType;
+
+    public float radius = 1.5f;
+
+    private bool fused = false;
+
+    private void Start()
+    {
+        fused = false;
+        FusionManager.instance.Register(this);
+    }
+
+    private void OnDestroy()
+    {
+        if (FusionManager.instance != null)
+            FusionManager.instance.Unregister(this);
+    }
+
+    private void Update()
+    {
+        if (fused) return;
+
+        CheckNearbyFusion();
+    }
+
+    private void CheckNearbyFusion()
+    {
+        foreach (FusionItem other in FusionManager.instance.activeItems)
+        {
+            if (other == this) continue;
+            if (other.fused) continue;
+
+            // float dist = Vector3.Distance(transform.position, other.transform.position);
+            float sqrDistance = (transform.position - other.transform.position).sqrMagnitude;
+
+            float sqrRadius = radius * radius;
+
+            // Debug.Log(other.name + " " + sqrDistance);
+            if (sqrDistance <= sqrRadius)
+            {
+                if (FusionManager.instance.TryFusion(this, other, out GameObject result))
+                {
+                    // Debug.Log($"Fusion detectada entre {name} y {other.name}, resultado: {result?.name}");
+                    // Debug.Log("Llamo");
+                    fused = true;
+                    other.fused = true;
+
+                    FusionManager.instance.ExecuteFusion(this,other);
+                    
+                    return;
+                }
+                // else  Debug.Log($"No se pudo fusionar {name} con {other.name}");
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if(itemType == ItemType.Particula)  Gizmos.color = Color.green;
+        else if(itemType == ItemType.Planeta) Gizmos.color = Color.red;
+        else if(itemType == ItemType.Nube) Gizmos.color = Color.blue;
+        else  Gizmos.color = Color.yellow;
+
+        Gizmos.DrawWireSphere(transform.position, radius /2);
+    }
+}

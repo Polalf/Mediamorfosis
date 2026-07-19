@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public enum ItemType {Particula , Planeta , Nube , Estrella }
@@ -11,6 +10,8 @@ public class FusionItem : MonoBehaviour
 
     private bool fused = false;
 
+    [Header("Game Area")]
+    [SerializeField] private float maxDistance = 65f;
     private void Start()
     {
         fused = false;
@@ -28,6 +29,7 @@ public class FusionItem : MonoBehaviour
         if (fused) return;
 
         CheckNearbyFusion();
+        Checkdistance();
     }
 
     private void CheckNearbyFusion()
@@ -60,7 +62,11 @@ public class FusionItem : MonoBehaviour
             }
         }
     }
-
+    private void Checkdistance()
+    {
+        float dist = Vector3.Distance(transform.position, Vector3.zero);
+        if(dist >= maxDistance) Destroy(gameObject);
+    }
     void OnDrawGizmos()
     {
         if(itemType == ItemType.Particula)  Gizmos.color = Color.green;

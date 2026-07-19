@@ -9,18 +9,19 @@ public class Meteor : MonoBehaviour
         Destroy(gameObject,timeToDie);
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         transform.Translate(transform.forward * speed * Time.deltaTime,Space.World);
     }
 
-    public void SetTarget(Transform target)
+    public void SetTarget(Vector3 target)
     {
         transform.LookAt(target);
     }
     void OnCollisionEnter(Collision collision)
     {
+        CameraShake.instance.ShakeCam();
         Destroy(collision.gameObject);
         Destroy(gameObject);
     }

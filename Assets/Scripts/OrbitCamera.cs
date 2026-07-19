@@ -1,10 +1,13 @@
 using UnityEngine;
 
+
+
 public class OrbitCamera : MonoBehaviour
 {
     [Header("Target")]
-    public Transform target;
+    public Transform target; 
 
+      
     [Header("Orbit")]
     public float distance = 10f;
     public float xSpeed = 120f;
@@ -86,4 +89,6 @@ public class OrbitCamera : MonoBehaviour
 
         return Mathf.Clamp(angle, min, max);
     }
+
+  
 }

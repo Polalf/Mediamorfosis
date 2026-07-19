@@ -19,7 +19,7 @@ public class Boton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, I
     void Awake()
     {
         btnImage.sprite = defaultSprite;
-        text.color = defaultColor;
+        if(text != null) text.color = defaultColor;
     }
     public void OnPointerClick(PointerEventData eventData)
     {

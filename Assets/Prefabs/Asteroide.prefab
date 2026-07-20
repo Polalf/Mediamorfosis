@@ -74,8 +74,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb9ca1da62284e54bbf5cc0807cb78eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Meteor
-  speed: 20
-  timeToDie: 10
+  speed: 50
+  timeToDie: 30
 --- !u!136 &484413163356387271
 CapsuleCollider:
   m_ObjectHideFlags: 0

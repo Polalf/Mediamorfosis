@@ -276,6 +276,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ffcba601953664459f622142342fc59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BlackHole
-  attractionRadius: 10
-  attractionForce: 100
+  attractionRadius: 20
+  attractionForce: 150
   destroyDistance: 1

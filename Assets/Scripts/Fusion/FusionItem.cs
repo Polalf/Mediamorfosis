@@ -1,27 +1,34 @@
 using UnityEngine;
 
+
 public enum ItemType {Particula , Planeta , Nube , Estrella }
 
 public class FusionItem : MonoBehaviour
 {
     public ItemType itemType;
 
-    public float radius = 1.5f;
-
+    public float radiusfactor = 1.5f;
+    private float currentRadius;
     private bool fused = false;
 
+    [SerializeField] private float minSize = 1f;
+    [SerializeField] private float maxSize = 3.5f;
+   
     [Header("Game Area")]
     [SerializeField] private float maxDistance = 65f;
     private void Start()
     {
         fused = false;
+        float size = Random.Range(minSize,maxSize);
+        // currentRadius = radius + size;
+        currentRadius = size * radiusfactor;
+        transform.localScale *=  size;
         FusionManager.instance.Register(this);
     }
 
     private void OnDestroy()
     {
-        if (FusionManager.instance != null)
-            FusionManager.instance.Unregister(this);
+        if (FusionManager.instance != null)FusionManager.instance.Unregister(this);
     }
 
     private void Update()
@@ -39,18 +46,16 @@ public class FusionItem : MonoBehaviour
             if (other == this) continue;
             if (other.fused) continue;
 
-            // float dist = Vector3.Distance(transform.position, other.transform.position);
             float sqrDistance = (transform.position - other.transform.position).sqrMagnitude;
 
-            float sqrRadius = radius * radius;
+            float sqrRadius = currentRadius * currentRadius;
 
-            // Debug.Log(other.name + " " + sqrDistance);
+
             if (sqrDistance <= sqrRadius)
             {
                 if (FusionManager.instance.TryFusion(this, other, out GameObject result))
                 {
-                    // Debug.Log($"Fusion detectada entre {name} y {other.name}, resultado: {result?.name}");
-                    // Debug.Log("Llamo");
+                   
                     fused = true;
                     other.fused = true;
 
@@ -58,7 +63,7 @@ public class FusionItem : MonoBehaviour
                     
                     return;
                 }
-                // else  Debug.Log($"No se pudo fusionar {name} con {other.name}");
+      
             }
         }
     }
@@ -74,6 +79,10 @@ public class FusionItem : MonoBehaviour
         else if(itemType == ItemType.Nube) Gizmos.color = Color.blue;
         else  Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireSphere(transform.position, radius /2);
+        Gizmos.DrawWireSphere(transform.position, currentRadius / 2);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, radiusfactor / 2);
+
     }
 }

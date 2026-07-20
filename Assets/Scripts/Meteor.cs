@@ -21,6 +21,7 @@ public class Meteor : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
+        
         CameraShake.instance.ShakeCam();
         Destroy(collision.gameObject);
         Destroy(gameObject);

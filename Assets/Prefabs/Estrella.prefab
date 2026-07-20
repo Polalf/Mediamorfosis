@@ -48,7 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FusionItem
   itemType: 3
-  radius: 2.5
+  radiusfactor: 2
+  minSize: 4
+  maxSize: 6.5
+  maxDistance: 65
 --- !u!135 &5647581475228061074
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -68,7 +71,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.75
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1850608868544798236
 Rigidbody:

@@ -76,6 +76,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Meteor
   speed: 50
   timeToDie: 30
+  collisioneffect: {fileID: 2058979551780464613, guid: d99e1e1f141bfbe44bc1001b9ead3946, type: 3}
 --- !u!136 &484413163356387271
 CapsuleCollider:
   m_ObjectHideFlags: 0

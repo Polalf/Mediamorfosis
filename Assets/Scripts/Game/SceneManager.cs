@@ -6,7 +6,7 @@ public class SceneManager : Singleton<SceneManager>
 {
     //variables 
     private bool isLoading = false;
-    // [SerializeField] Animator animator;
+    [SerializeField] Animator animator;
     //properties
     protected override bool persistent => true;
 
@@ -34,10 +34,10 @@ public class SceneManager : Singleton<SceneManager>
 
     IEnumerator AnimationChangeScene(string _sceneName)
     {
-        // animator.Play("changeScene");
+        animator.Play("changeScene");
         yield return new WaitForSeconds(.55f);
         isLoading = false;
         UnitySceneManager.LoadScene(_sceneName);
-        // animator.Play("sceneReady");
+        animator.Play("sceneReady");
     }
 }

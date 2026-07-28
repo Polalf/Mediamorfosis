@@ -79,10 +79,10 @@ public class FusionItem : MonoBehaviour
         else if(itemType == ItemType.Nube) Gizmos.color = Color.blue;
         else  Gizmos.color = Color.yellow;
 
-        Gizmos.DrawWireSphere(transform.position, currentRadius / 2);
+        Gizmos.DrawWireSphere(transform.position, currentRadius);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radiusfactor / 2);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, radiusfactor);
 
     }
 }
